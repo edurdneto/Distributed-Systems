@@ -34,6 +34,35 @@ public class Server implements Service {
 	        }
 	        return String.valueOf(res);
 	    }
+	    
+	    public int getStatus(int id) {
+	    	int size=fila.size();
+	    	while(size!=0){
+	    		if(fila.get(size-1).getId()==id){
+	    			return fila.get(size-1).getStatus();
+	    		}
+	    		size--;
+	    	}
+	    	return -1;
+	    }
+	    
+	    public void freeLock(int id){
+	    	int size=fila.size();
+	    	fila.remove(0);
+	    	if(fila.size()!=0)fila.get(0).setStatus(0);
+	    }
+	    
+	    public void getFila(){
+	    	int i=0;
+	    	if(fila.size()!=0){
+	    		System.out.println("Fila:");
+	    		while(i<fila.size()-1){
+	    			System.out.print(fila.get(i).getId()+",");
+	    			i++;
+	    		}
+	    		if(i==fila.size()-1)System.out.println(fila.get(i).getId()+",");
+	    	}
+	    }
 
 	    public static void main(String args[]) {
 	    	try {
